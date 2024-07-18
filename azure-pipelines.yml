@@ -6,21 +6,52 @@
 trigger:
 - main
 
-pool:
-  vmImage: ubuntu-latest
+stages:
+  - stage: BuildAndPushDockerImages
+    displayName: 'Build and Push Frontend Image to Docker Registry '
+    jobs:
+    - job: BuildAndPushFrontend
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'Docker Registry'
+          repository: 'umararafath/account-module-frontend'
+          command: 'buildAndPush'
+          Dockerfile: 'frontend/Dockerfile'
 
-steps:
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker Registry'
-      repository: 'umararafath/account-module-frontend'
-      command: 'buildAndPush'
-      Dockerfile: 'frontend/Dockerfile'
-  - task: Docker@2
-    inputs:
-      containerRegistry: 'Docker Registry'
-      repository: 'umararafath/account-module-backend'
-      command: 'buildAndPush'
-      Dockerfile: 'backend/Dockerfile'
+    - job: BuildAndPushBackend
+      displayName: 'Build and Push Backend Image to Docker Registry'
+      pool:
+        vmImage: ubuntu-latest
+      steps:
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'Docker Registry'
+          repository: 'umararafath/account-module-backend'
+          command: 'buildAndPush'
+          Dockerfile: 'backend/Dockerfile'
+
+  - stage: PullAndRunDockerImages
+    displayName: 'Pull Images from Docker Registry and Run it'
+    jobs:
+      - job: PullAndRunFrontendImage
+        displayName: 'Pull and Run Frontend Image'
+        pool: 
+          name: practice-agent
+        steps:
+          - script: |
+              docker run -d -p 3000:3000 --name frontend-image umararafath/account-module-frontend:$(Build.BuildId)
   
-  
+      - job: PullAndRunBackendImage
+        displayName: 'Pull and Run Backend Image'
+        pool: 
+          name: practice-agent
+        steps:
+          - script: |
+              docker run -d -p 3001:3001 --name backend-image umararafath/account-module-backend:$(Build.BuildId)
+              docker ps
+        
+
+        
