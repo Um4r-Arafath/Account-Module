@@ -42,7 +42,7 @@ stages:
           name: practice-agent
         steps:
           - script: |
-              docker run -d -p 3000:3000 --name frontend-image umararafath/account-module-frontend:$(Build.BuildId)
+              sudo docker run -d -p 3000:3000 --name frontend-image umararafath/account-module-frontend:$(Build.BuildId)
   
       - job: PullAndRunBackendImage
         displayName: 'Pull and Run Backend Image'
@@ -50,8 +50,8 @@ stages:
           name: practice-agent
         steps:
           - script: |
-              docker run -d -p 3001:3001 --name backend-image umararafath/account-module-backend:$(Build.BuildId)
-              docker ps
+              sudo docker run -d -p 3001:3001 --name backend-image umararafath/account-module-backend:$(Build.BuildId)
+              sudo docker ps
         
 
         
