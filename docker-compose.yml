@@ -1,0 +1,20 @@
+services:
+  frontend:
+    # build:
+    #   context: ./frontend
+    #   dockerfile: Dockerfile
+    image: umararafath/account-module-frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - account-network
+
+  backend:
+    # build:
+    #   context: ./backend
+    #   dockerfile: Dockerfile
+    image: umararafath/account-module-backend
+    ports:
+      - "3001:3001"
+    networks:
+      - account-network

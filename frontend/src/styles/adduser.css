@@ -1,0 +1,24 @@
+.adduser-icon {
+    margin-top: -8px;
+    margin-right: 5px;
+}
+
+.Toastify__toast--success {
+    text-transform: lowercase;
+    font-size: 14px;
+}
+
+.Toastify__toast--error {
+    text-transform: lowercase;
+    font-size: 14px;
+}
+
+.Toastify__toast--warning {
+    text-transform: lowercase;
+    font-size: 14px;
+}
+
+.Toastify__toast--error {
+    text-transform: lowercase;
+    font-size: 14px;
+}

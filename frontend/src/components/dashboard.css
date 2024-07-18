@@ -1,0 +1,98 @@
+#sidebar {
+  background-color: #000000;
+  color: #ffffff;
+  padding-top: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+
+
+  @media (min-width: 1920px) {
+    width: 350px;
+  }
+}
+
+#sidebar a {
+  color: #ffffff;
+  border-radius: 25px !important;
+}
+
+
+.active-link {
+  background-color: #ffffff;
+}
+
+#sidebar a:hover,
+#si#sign-out:hover {
+  background-color: #ffffff;
+  color: black !important;
+  border-radius: 25px !important;
+}
+
+/* Adjusting dropdown text color */
+.dropdown-menu a {
+  color: #ffffff !important; /* Dropdown text color */
+}
+
+/* Adjusting dropdown background */
+.dropdown-menu {
+  background-color: #1f1f1f; /* Dropdown background color */
+}
+
+.dropdown-menu {
+  margin-top: 6px !important;
+  width: 100%;
+  left: auto;
+  border-radius: 20px;
+  }
+
+#content {
+  margin-right: 10px !important;
+  padding: 20px;
+  z-index: 0;
+
+  @media (min-width: 1920px) {
+    margin-right: 70px !important;
+  }
+}
+
+
+#sign-out {
+  margin-top: 35vh;
+
+  @media (min-width: 1920px) {
+    margin-top: 57vh;
+  }
+
+  /* Adjust for laptops/tablets */
+  @media (max-width: 1200px) {
+    margin-top: 30vh;
+  }
+
+  /* Adjust for tablets */
+  @media (max-width: 992px) {
+    margin-top: 40vh;
+  }
+
+  /* Adjust for mobile screens */
+  @media (max-width: 768px) {
+    margin-top: 10vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #sidebar {
+    display: none;
+  }
+
+  #content {
+    margin-left: 0;
+  }
+}
