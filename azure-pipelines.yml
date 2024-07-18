@@ -22,6 +22,7 @@ stages:
           Dockerfile: 'frontend/Dockerfile'
 
     - job: BuildAndPushBackend
+      dependsOn: BuildAndPushFrontend
       displayName: 'Build and Push Backend Image to Docker Registry'
       pool:
         vmImage: ubuntu-latest
@@ -42,15 +43,19 @@ stages:
           name: practice-agent
         steps:
           - script: |
+              sudo rm -f frontend-image
               sudo docker run -d -p 3000:3000 --name frontend-image umararafath/account-module-frontend:$(Build.BuildId)
   
       - job: PullAndRunBackendImage
         displayName: 'Pull and Run Backend Image'
+        dependsOn: PullAndRunFrontendImage
         pool: 
           name: practice-agent
         steps:
           - script: |
+              sudo rm -f backend-image
               sudo docker run -d -p 3001:3001 --name backend-image umararafath/account-module-backend:$(Build.BuildId)
+              sudo docker image prune -a -f
               sudo docker ps
         
 
