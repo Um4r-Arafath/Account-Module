@@ -40,7 +40,7 @@ stages:
       - job: PullAndRunFrontendImage
         displayName: 'Pull and Run Frontend Image'
         pool: 
-          name: practice-agent
+          name: local-agent-task-06
         steps:
           - script: |
               sudo rm -f frontend-image
@@ -50,7 +50,7 @@ stages:
         displayName: 'Pull and Run Backend Image'
         dependsOn: PullAndRunFrontendImage
         pool: 
-          name: practice-agent
+          name: local-agent-task-06
         steps:
           - script: |
               sudo rm -f backend-image
